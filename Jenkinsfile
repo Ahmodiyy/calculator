@@ -44,6 +44,12 @@ pipeline {
                                   ])
                }
         }
+        stage('docker build') {
+                     steps {
+                         sh "docker build -t calculator ."
+                     }
+                }
+
     }
     post {
             always {
