@@ -9,6 +9,7 @@ pipeline {
         stage('Linux permission') {
             steps {
                 sh "chmod +x gradlew"
+                sh "docker version"
             }
         }
         stage('gradle build') {
