@@ -11,7 +11,7 @@ pipeline {
                 sh "chmod +x gradlew"
             }
         }
-        stage('docker build') {
+        stage('gradle build') {
                      steps {
                          sh "./gradlew build"
                      }
