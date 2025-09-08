@@ -6,17 +6,16 @@ pipeline {
                 git url: 'https://github.com/Ahmodiyy/calculator.git', branch: 'main'
             }
         }
-        stage('Compile') {
+        stage('Linux permission') {
             steps {
                 sh "chmod +x gradlew"
-                sh "./gradlew compileJava"
             }
         }
-        stage('Unit Test') {
-             steps {
-                 sh "./gradlew test"
-             }
-        }
+        stage('docker build') {
+                     steps {
+                         sh "./gradlew build"
+                     }
+                }
         stage("Code Coverage") {
               steps {
                   sh "./gradlew jacocoTestReport"
@@ -45,10 +44,10 @@ pipeline {
                }
         }
         stage('docker build') {
-                     steps {
-                         sh "docker build -t calculator ."
-                     }
-                }
+                 steps {
+                     sh "docker build -t calculator ."
+                 }
+        }
 
     }
     post {
