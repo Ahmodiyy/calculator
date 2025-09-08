@@ -52,7 +52,7 @@ pipeline {
     }
     post {
             always {
-                mail to: 'team@company.com',
+                mail to: 'ahmodolaitan03@gmail.com',
                     subject: "Completed Pipeline for: ${currentBuild.fullDisplayName}",
                     body: "Your build completed, please check: ${env.BUILD_URL}"
                 slackSend channel: '#test', color: 'green', message: "The pipeline ${currentBuild.fullDisplayName} result."
