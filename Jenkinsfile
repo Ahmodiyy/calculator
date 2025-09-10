@@ -50,6 +50,21 @@ pipeline {
                      sh "docker build -t calculator ."
                  }
         }
+        stage("Docker login") {
+          steps {
+            withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'dockerhub',
+                              usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
+              sh "docker login --username $USERNAME --password $PASSWORD"
+            }
+          }
+        }
+
+        stage('docker build') {
+                 steps {
+                     sh "docker push calculator"
+                 }
+        }
+
 
     }
     post {
