@@ -1,5 +1,7 @@
 pipeline {
-    agent any
+    agent {
+    label "pipeline"
+    }
     stages {
         stage('Checkout') {
             steps {
@@ -8,19 +10,23 @@ pipeline {
         }
         stage('Linux permission') {
             steps {
-                sh "chmod +x gradlew"
-                sh "docker version"
+                //sh "chmod +x gradlew"
+                //sh "docker version"
+                bat "docker version"
             }
         }
         stage('gradle build') {
                      steps {
-                         sh "./gradlew clean"
-                         sh "./gradlew build"
+                         //sh "./gradlew clean"
+                         //sh "./gradlew build"
+                         bat "./gradlew clean"
+                         bat "./gradlew build"
                      }
                 }
         stage("Code Coverage") {
               steps {
-                  sh "./gradlew jacocoTestReport"
+                  //sh "./gradlew jacocoTestReport"
+                  bat "./gradlew jacocoTestReport"
                   publishHTML(target: [
                                       allowMissing: false,
                                       alwaysLinkToLastBuild: false,
@@ -29,12 +35,14 @@ pipeline {
                                       reportFiles: 'index.html',
                                       reportName: 'JaCoCo Report'
                                   ])
-                  sh "./gradlew jacocoTestCoverageVerification"
+                  //sh "./gradlew jacocoTestCoverageVerification"
+                  bat "./gradlew jacocoTestCoverageVerification"
               }
         }
         stage("Static code analysis") {
                steps {
-                   sh "./gradlew checkstyleMain"
+                   //sh "./gradlew checkstyleMain"
+                   bat "./gradlew checkstyleMain"
                    publishHTML(target: [
                                       allowMissing: false,
                                       alwaysLinkToLastBuild: false,
@@ -47,21 +55,23 @@ pipeline {
         }
         stage('docker build') {
                  steps {
-                     sh "docker build -t calculator ."
+                     //sh "docker build -t calculator ."
+                     bat "docker build -t ahmodiyy/calculator ."
                  }
         }
-        stage("Docker login") {
-          steps {
-            withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'dockerhub',
-                              usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
-              sh "docker login --username $USERNAME --password $PASSWORD"
-            }
-          }
-        }
+//         stage("Docker login") {
+//           steps {
+//             withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'dockerhub',
+//                               usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
+//               sh "docker login --username $USERNAME --password $PASSWORD"
+//             }
+//           }
+//         }
 
-        stage('docker build') {
+        stage('docker push') {
                  steps {
-                     sh "docker push calculator"
+                     //sh "docker push calculator"
+                     bat "docker push ahmodiyy/calculator"
                  }
         }
 
