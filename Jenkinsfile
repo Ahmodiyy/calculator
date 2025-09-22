@@ -8,11 +8,12 @@ pipeline {
                 git url: 'https://github.com/Ahmodiyy/calculator.git', branch: 'main'
             }
         }
-        stage('Linux permission') {
+        stage('version check') {
             steps {
                 //sh "chmod +x gradlew"
                 //sh "docker version"
                 bat "docker version"
+                bat "ansible --version"
             }
         }
         stage('gradle build') {
