@@ -4,8 +4,8 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class CalculatorTest {
-    private Calculator calculator = new Calculator();
+public class CalculatorServiceTest {
+    private final CalculatorService calculator = new CalculatorService();
 
     @Test
     public void testSum() {
