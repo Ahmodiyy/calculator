@@ -24,7 +24,12 @@ public class CalculatorTest {
     public void the_calculator_sums_them() throws Throwable {
         String url = String.format("%s/sum?a=%s&b=%s", server,
                 a, b);
-        result = restTemplate.getForObject(url, String.class);
+        try {
+            System.out.println("begin request");
+            result = restTemplate.getForObject(url, String.class);
+        } catch (Exception ex) {
+            throw new IllegalStateException("Calculator service is not reachable", ex);
+        }
     }
 
     @Then("^I receive (.*) as a result$")
