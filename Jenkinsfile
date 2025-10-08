@@ -60,7 +60,7 @@ pipeline {
 
         stage('docker run') {
                  steps {
-                     bat "docker push ahmodiyy/calculator"
+                     bat "docker run ahmodiyy/calculator"
                  }
         }
 
