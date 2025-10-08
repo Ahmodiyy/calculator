@@ -60,12 +60,13 @@ pipeline {
 
         stage('docker run') {
                  steps {
-                     bat "docker run ahmodiyy/calculator"
+                     bat "docker run -d -p 9090:9090 --name calculator ahmodiyy/calculator"
                  }
         }
 
         stage('Acceptance Test') {
                  steps {
+                     sleep 60
                      bat "./gradlew acceptanceTest"
                  }
         }
