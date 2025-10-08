@@ -7,7 +7,7 @@ import static org.junit.Assert.assertEquals;
 
 public class CalculatorTest {
     //private String server = System.getProperty("calculator.url");
-    private String server = "http://localhost:8080";
+    private String server = "http://localhost:9090";
     private RestTemplate restTemplate = new RestTemplate();
     private String a;
     private String b;

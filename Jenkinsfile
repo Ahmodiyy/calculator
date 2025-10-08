@@ -58,6 +58,18 @@ pipeline {
                  }
         }
 
+        stage('docker run') {
+                 steps {
+                     bat "docker push ahmodiyy/calculator"
+                 }
+        }
+
+        stage('Acceptance Test') {
+                 steps {
+                     bat "./gradlew acceptanceTest"
+                 }
+        }
+
 
     }
     post {
