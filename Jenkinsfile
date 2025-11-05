@@ -11,6 +11,7 @@ pipeline {
         stage('version check') {
             steps {
                 bat "docker version"
+                bat "ansible --version"
             }
         }
         stage('gradle build') {
