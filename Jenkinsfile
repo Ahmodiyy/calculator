@@ -72,6 +72,12 @@ pipeline {
                  }
         }
 
+        stage('Ansible deployment') {
+                 steps {
+                     bat "wsl -d Ubuntu ansible-playbook -i ansible/hosts calculator.yml"
+                 }
+        }
+
 
     }
     post {
