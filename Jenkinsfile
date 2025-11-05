@@ -11,7 +11,7 @@ pipeline {
         stage('version check') {
             steps {
                 bat "docker version"
-                bat "ansible --version"
+                bat "wsl -d Ubuntu ansible --version"
             }
         }
         stage('gradle build') {
