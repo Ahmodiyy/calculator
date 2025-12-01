@@ -1,0 +1,11 @@
+    strategy:
+      type: RollingUpdate
+      rollingUpdate:
+        maxUnavailable: 50%
+        maxSurge: 0
+
+
+                    readinessProbe:
+                      httpGet:
+                        path: /sum?a=1&b=2
+                        port: 9090
